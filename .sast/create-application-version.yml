@@ -1,0 +1,16 @@
+name: 'Create sandbox in a veracode application'
+description: 'creation of a sandbox in veracode'
+inputs:
+  application:  # id of input
+    required: true
+    default: ${{ appname }}
+  sandbox:
+    default: ${{ sandboxname }}
+outputs:
+  random-number:
+    value: 'Sandbox named "toto" is created... '
+runs:
+  using: "composite"
+  steps:
+    - run: pip install -r requierements.txt
+    - run: python create-application-version.py ${{ inputs.application }} ${{ inputs.sandbox }}

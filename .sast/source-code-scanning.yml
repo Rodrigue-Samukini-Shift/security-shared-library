@@ -1,0 +1,6 @@
+with:
+  appname: 'VeraDemo'
+  createprofile: false
+  filepath: '*.py'
+  vid: '${{ secrets.API_ID }}'
+  vkey: '${{ secrets.API_KEY }}'
