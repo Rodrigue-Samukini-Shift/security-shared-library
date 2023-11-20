@@ -3,9 +3,8 @@ description: 'creation of a sandbox in veracode'
 inputs:
   application:  # id of input
     required: true
-    default: ${{ appname }}
   sandbox:
-    default: ${{ sandboxname }}
+    default: ${{ github.ref.name }}
 outputs:
   random-number:
     value: 'Sandbox named "toto" is created... '
