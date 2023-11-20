@@ -1,2 +1,2 @@
-requests
-urllib
+veracode-api-py>=0.9.45
+requests>=2.31.0
