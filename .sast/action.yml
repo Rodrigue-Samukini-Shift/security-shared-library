@@ -11,7 +11,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: pip install -r requierements.txt
+    - run: pip install -r secu-requirements.txt
       shell: bash
     - run: python create-application-version.py ${{ inputs.application }} ${{ inputs.sandbox }}
       shell: bash
