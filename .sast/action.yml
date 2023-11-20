@@ -11,6 +11,10 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - run: |
+          echo [default] > .veracode/credentials
+          echo veracode_api_key_id = ${{ secrets.API_ID }} >> .veracode/credentials
+          echo veracode_api_key_secret = ${{ secrets.API_KEY }} >> .veracode/credentials
     - run: pip install -r secu-requirements.txt
       shell: bash
     - run: python create-application-version.py ${{ inputs.application }} ${{ inputs.sandbox }}
