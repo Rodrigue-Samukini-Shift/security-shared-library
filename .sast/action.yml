@@ -12,4 +12,6 @@ runs:
   using: "composite"
   steps:
     - run: pip install -r requierements.txt
+      shell: bash
     - run: python create-application-version.py ${{ inputs.application }} ${{ inputs.sandbox }}
+      shell: bash
