@@ -8,3 +8,4 @@ echo [default] > ../../../.veracode/credentials
 echo veracode_api_key_id = $1 >> ../../../.veracode/credentials
 echo veracode_api_key_secret = $2 >> ../../../.veracode/credentials
 git show --pretty="" --name-only $3 > files.txt
+git diff-tree --no-commit-id --name-only $3 -r > files.txt
