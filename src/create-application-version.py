@@ -22,7 +22,13 @@ def get_app_by_name(app_name):
 
 def create_application_sandbox(application_guid, sandbox_name):
     app_sandbox = Sandboxes()
-    app_sandbox.create(application_guid, sandbox_name)
+    app_exists_sandbox = app_sandbox.get_all(application_guid)
+    for sand in app_exists_sandbox:
+        if sand["name"] == sandbox_name:
+            print("Sandbox " + sandbox_name + " already exists...")
+            return 0
+    create_new = app_sandbox.create(application_guid, sandbox_name)
+    print("Sandbox " + sandbox_name + " successful created...")
 
 
 if __name__ == "__main__":
