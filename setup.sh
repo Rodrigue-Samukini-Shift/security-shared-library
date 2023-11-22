@@ -7,4 +7,3 @@ mkdir -p ../../../.veracode >> security.log
 echo [default] > ../../../.veracode/credentials
 echo veracode_api_key_id = $1 >> ../../../.veracode/credentials
 echo veracode_api_key_secret = $2 >> ../../../.veracode/credentials
-git show --pretty="" --name-only $3 > files.txt
