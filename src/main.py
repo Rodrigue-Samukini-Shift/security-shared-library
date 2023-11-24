@@ -47,10 +47,18 @@ def get_findings(application_guid, sandbox_guid):
 
 
 def pipeline_status(sorted_vulns):
-    for elem in sorted_vulns:
-        if sorted_vulns["Very High"] + sorted_vulns["High"] + sorted_vulns["Medium"] + sorted_vulns["Low"] + \
-                sorted_vulns["Very Low"] + sorted_vulns["International"] > 0:
-            return sys.exit(1)
+    if sorted_vulns["Very High"] + sorted_vulns["High"] + sorted_vulns["Medium"] + sorted_vulns["Low"] + \
+            sorted_vulns["Very Low"] + sorted_vulns["International"] > 0:
+        print("*******************************************************************")
+        print("       THE PIPELINE FAILED DUE TO SAST VULNERABILITIES FOUND       ")
+        print("*******************************************************************")
+        return sys.exit(1)
+    else:
+        print("*******************************************************************")
+        print("           SUCCESSFUL SAST SCAN - NO VULNERABILITIES FOUND         ")
+        print("*******************************************************************")
+        return sys.exit(0)
+
 
 
 def sast_passfail_policies(application_guid, sandbox_guid):
@@ -61,9 +69,8 @@ def sast_passfail_policies(application_guid, sandbox_guid):
 
 
 def affichage(sorted_vulns: dict, space):
-    print(" THE VERACODE VUNERABILITY RESULT ")
-    print("")
-    print("")
+    print(" ************ THE VERACODE VUNERABILITY RESULT ************")
+    print(" ")
     print("                COUNT   ")
     for elem in sorted_vulns:
         nbr_print = space - len(elem)
