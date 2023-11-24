@@ -5,6 +5,8 @@ inputs:
     required: true
   sandbox:
     required: true
+  type:
+    required: true
 outputs:
   random-number:
     value: 'Sandbox named "toto" is created... '
@@ -13,5 +15,5 @@ runs:
   steps:
     - run: pip install -r secu-requirements.txt >> security.log
       shell: bash
-    - run: python create-application-version.py ${{ inputs.application }} ${{ inputs.sandbox }}
+    - run: python main.py ${{ inputs.application }} ${{ inputs.sandbox }} ${{ inputs.type }}
       shell: bash
