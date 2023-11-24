@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-curl --create-dirs -o .github/actions/create-sandbox/action.yml https://raw.githubusercontent.com/Rodrigue-Samukini-Shift/security-shared-library/main/.sast/action.yml > security.log
+curl --create-dirs -o .github/actions/sandbox/action.yml https://raw.githubusercontent.com/Rodrigue-Samukini-Shift/security-shared-library/main/.sast/action.yml > security.log
 curl --create-dirs -o secu-requirements.txt https://raw.githubusercontent.com/Rodrigue-Samukini-Shift/security-shared-library/main/requirements.txt >> security.log
 curl --create-dirs -o main.py https://raw.githubusercontent.com/Rodrigue-Samukini-Shift/security-shared-library/main/src/main.py >> security.log
 mkdir -p ../../../.veracode >> security.log
