@@ -25,7 +25,6 @@ def get_sandbox_uid(application_guid, sandbox_name):
     app_exists_sandbox = app_sandbox.get_all(application_guid)
     for sand in app_exists_sandbox:
         if sand["name"] == sandbox_name:
-            print("Sandbox " + sandbox_name + " already exists...")
             return sand["guid"]
 
 
@@ -47,14 +46,45 @@ def get_findings(application_guid, sandbox_guid):
     return app_findings
 
 
-def sast_passfail_policies():
-    return 0
+def sast_passfail_policies(application_guid, sandbox_guid):
+    issues = get_findings(application_guid, sandbox_guid)
+    sorted_vulns = count_vulns_by_severity(issues)
+    affichage(sorted_vulns, 13)
+
+
+def affichage(sorted_vulns: dict, space):
+    print(" THE VERACODE VUNERABILITY RESULT ")
+    print("")
+    print("")
+    print("                COUNT   ")
+    for elem in sorted_vulns:
+        nbr_print = space - len(elem)
+        to_print = " " * nbr_print + elem + ":" + " " * 3 + str(sorted_vulns[elem])
+        print(to_print)
+
+
+def count_vulns_by_severity(issues):
+    results = {"Very High": 0, "High": 0, "Medium": 0, "Low": 0, "Very Low": 0, "International": 0}
+    for vuln in issues:
+        if vuln["finding_details"]["severity"] == 1:
+            results["Very High"] += 1
+        if vuln["finding_details"]["severity"] == 2:
+            results["High"] += 1
+        if vuln["finding_details"]["severity"] == 3:
+            results["Medium"] += 1
+        if vuln["finding_details"]["severity"] == 4:
+            results["Low"] += 1
+        if vuln["finding_details"]["severity"] == 5:
+            results["Very Low"] += 1
+        if vuln["finding_details"]["severity"] == 6:
+            results["International"] += 1
+    return results
 
 
 if __name__ == "__main__":
     get_app_guid = get_app_by_name(sys.argv[1])[0]["guid"]
-    if sys.argv[2] == "created":
+    if sys.argv[3] == "create":
         sandbox_created = create_application_sandbox(get_app_guid, sys.argv[2])
     else:
         sandbox_uid = get_sandbox_uid(get_app_guid, sys.argv[2])
-        get_findings(get_app_guid, sandbox_uid)
+        sast_passfail_policies(get_app_guid, sandbox_uid)
