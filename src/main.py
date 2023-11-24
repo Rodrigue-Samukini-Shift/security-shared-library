@@ -46,10 +46,18 @@ def get_findings(application_guid, sandbox_guid):
     return app_findings
 
 
+def pipeline_status(sorted_vulns):
+    for elem in sorted_vulns:
+        if sorted_vulns["Very High"] + sorted_vulns["High"] + sorted_vulns["Medium"] + sorted_vulns["Low"] + \
+                sorted_vulns["Very Low"] + sorted_vulns["International"] > 0:
+            return sys.exit(1)
+
+
 def sast_passfail_policies(application_guid, sandbox_guid):
     issues = get_findings(application_guid, sandbox_guid)
     sorted_vulns = count_vulns_by_severity(issues)
     affichage(sorted_vulns, 13)
+    pipeline_status(sorted_vulns)
 
 
 def affichage(sorted_vulns: dict, space):
