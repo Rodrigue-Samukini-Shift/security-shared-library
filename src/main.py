@@ -69,7 +69,7 @@ def sast_passfail_policies(application_guid, sandbox_guid):
 
 
 def affichage(sorted_vulns: dict, space):
-    print(" ************ THE VERACODE VUNERABILITY RESULT ************")
+    print(" ************************ THE VERACODE VUNERABILITY RESULT ***************************")
     print(" ")
     print("                COUNT   ")
     for elem in sorted_vulns:
