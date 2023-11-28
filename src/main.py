@@ -48,7 +48,7 @@ def get_findings(application_guid, sandbox_guid):
 
 def pipeline_status(sorted_vulns):
     if sorted_vulns["Very High"] + sorted_vulns["High"] + sorted_vulns["Medium"] + sorted_vulns["Low"] + \
-            sorted_vulns["Very Low"] + sorted_vulns["International"] > 0:
+            sorted_vulns["Very Low"] + sorted_vulns["Information"] > 0:
         print("*******************************************************************")
         print("       THE PIPELINE FAILED DUE TO SAST VULNERABILITIES FOUND       ")
         print("*******************************************************************")
@@ -79,20 +79,20 @@ def affichage(sorted_vulns: dict, space):
 
 
 def count_vulns_by_severity(issues):
-    results = {"Very High": 0, "High": 0, "Medium": 0, "Low": 0, "Very Low": 0, "International": 0}
+    results = {"Very High": 0, "High": 0, "Medium": 0, "Low": 0, "Very Low": 0, "Information": 0}
     for vuln in issues:
-        if vuln["finding_details"]["severity"] == 1:
+        if vuln["finding_details"]["severity"] == 5:
             results["Very High"] += 1
-        if vuln["finding_details"]["severity"] == 2:
+        if vuln["finding_details"]["severity"] == 4:
             results["High"] += 1
         if vuln["finding_details"]["severity"] == 3:
             results["Medium"] += 1
-        if vuln["finding_details"]["severity"] == 4:
+        if vuln["finding_details"]["severity"] == 2:
             results["Low"] += 1
-        if vuln["finding_details"]["severity"] == 5:
+        if vuln["finding_details"]["severity"] == 1:
             results["Very Low"] += 1
-        if vuln["finding_details"]["severity"] == 6:
-            results["International"] += 1
+        if vuln["finding_details"]["severity"] == 0:
+            results["Information"] += 1
     return results
 
 
