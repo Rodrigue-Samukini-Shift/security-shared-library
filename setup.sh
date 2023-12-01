@@ -7,5 +7,8 @@ mkdir -p ../../../.veracode >> security.log
 echo [default] > ../../../.veracode/credentials
 echo veracode_api_key_id = $1 >> ../../../.veracode/credentials
 echo veracode_api_key_secret = $2 >> ../../../.veracode/credentials
-zip scan-files.zip "${@:3}" >> security.log
-cat security.log
+ls -a
+find . -name '*.nupkg'
+#zip scan-files.zip "${@:3}" >> security.log
+#zip scan-files.zip "${@:3}" >> security.log
+#cat security.log
