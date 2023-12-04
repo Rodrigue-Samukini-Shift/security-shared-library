@@ -40,9 +40,9 @@ def create_application_sandbox(application_guid, sandbox_name):
     return create_new["guid"]
 
 
-def get_findings(application_guid, sandbox_guid):
+def get_findings(application_guid, sandbox_guid, type):
     finding = Findings()
-    app_findings = finding.get_findings(application_guid, 'STATIC', 'TRUE', None, sandbox_guid)
+    app_findings = finding.get_findings(application_guid, type, 'TRUE', None, sandbox_guid)
     return app_findings
 
 
@@ -62,10 +62,14 @@ def pipeline_status(sorted_vulns):
 
 
 def sast_passfail_policies(application_guid, sandbox_guid):
-    issues = get_findings(application_guid, sandbox_guid)
+    issues = get_findings(application_guid, sandbox_guid, 'STATIC')
     sorted_vulns = count_vulns_by_severity(issues)
     affichage(sorted_vulns, 13)
     pipeline_status(sorted_vulns)
+
+def sca_passfail_policies(application_guid, sandbox_guid):
+    issues = get_findings(application_guid, sandbox_guid, 'SCA')
+    return issues
 
 
 def affichage(sorted_vulns: dict, space):
@@ -102,4 +106,5 @@ if __name__ == "__main__":
         sandbox_created = create_application_sandbox(get_app_guid, sys.argv[2])
     else:
         sandbox_uid = get_sandbox_uid(get_app_guid, sys.argv[2])
-        sast_passfail_policies(get_app_guid, sandbox_uid)
+        #sast_passfail_policies(get_app_guid, sandbox_uid)
+        sca_passfail_policies(get_app_guid, sandbox_uid)
