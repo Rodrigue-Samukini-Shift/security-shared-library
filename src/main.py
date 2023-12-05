@@ -106,5 +106,5 @@ if __name__ == "__main__":
         sandbox_created = create_application_sandbox(get_app_guid, sys.argv[2])
     else:
         sandbox_uid = get_sandbox_uid(get_app_guid, sys.argv[2])
-        #sast_passfail_policies(get_app_guid, sandbox_uid)
-        sca_passfail_policies(get_app_guid, sandbox_uid)
+        sast_passfail_policies(get_app_guid, sandbox_uid)
+        #sca_passfail_policies(get_app_guid, sandbox_uid)
