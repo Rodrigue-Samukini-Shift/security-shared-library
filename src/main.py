@@ -69,7 +69,9 @@ def sast_passfail_policies(application_guid, sandbox_guid):
 
 def sca_passfail_policies(application_guid, sandbox_guid):
     issues = get_findings(application_guid, sandbox_guid, 'SCA')
-    return issues
+    sorted_vulns = count_vulns_by_severity(issues)
+    affichage(sorted_vulns, 13)
+    pipeline_status(sorted_vulns)
 
 
 def affichage(sorted_vulns: dict, space):
@@ -106,5 +108,7 @@ if __name__ == "__main__":
         sandbox_created = create_application_sandbox(get_app_guid, sys.argv[2])
     else:
         sandbox_uid = get_sandbox_uid(get_app_guid, sys.argv[2])
-        sast_passfail_policies(get_app_guid, sandbox_uid)
-        #sca_passfail_policies(get_app_guid, sandbox_uid)
+        if sys.argv[3] == "findingsSAST":
+            sast_passfail_policies(get_app_guid, sandbox_uid)
+        else:
+            sca_passfail_policies(get_app_guid, sandbox_uid)
