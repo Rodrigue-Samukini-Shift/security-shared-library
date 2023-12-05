@@ -7,6 +7,7 @@ mkdir -p ../../../.veracode >> security.log
 echo [default] > ../../../.veracode/credentials
 echo veracode_api_key_id = $1 >> ../../../.veracode/credentials
 echo veracode_api_key_secret = $2 >> ../../../.veracode/credentials
+echo $4
 if [ "$3" == ".NET" ]; then
   APP_PACKAGE=$(find . -name '*.nupkg')
 fi
